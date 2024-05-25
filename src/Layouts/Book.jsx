@@ -1,11 +1,15 @@
 import React from 'react';
 import { CiStar } from "react-icons/ci";
+import { useNavigate } from 'react-router-dom';
 
 const Book = ({ x }) => {
-    console.log(x);
+    const navigate = useNavigate();
+    const handleDetail = () =>{
+         navigate(`/detail/${x.bookId}`)
+    }
     return (
         <div>
-            <div className="p-6 rounded-md shadow-md bg-gray-50 text-gray-900">
+            <div onClick={()=>handleDetail()} className="p-6 rounded-md shadow-md bg-gray-50 text-gray-900">
                 <img src={x.image} alt="" className="object-cover object-center w-full rounded-md h-[300px] bg-gray-500" />
                 <div className='my-2 flex justify-start items-center gap-3'>
                     {

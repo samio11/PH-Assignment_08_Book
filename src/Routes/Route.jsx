@@ -4,6 +4,7 @@ import Error from "../Layouts/Error";
 import Home from "../Layouts/Home";
 import ListedBooks from "../Layouts/ListedBooks";
 import PagesRead from "../Layouts/PagesRead";
+import DetailBook from "../Components/DetailBook";
 
 export const my_web = createBrowserRouter([
     {
@@ -23,6 +24,11 @@ export const my_web = createBrowserRouter([
             {
                 path:"/readPages",
                 element:<PagesRead></PagesRead>
+            },
+            {
+                path: '/detail/:id',
+                element: <DetailBook></DetailBook>,
+                loader: () => fetch('book.json')
             }
         ]
     }

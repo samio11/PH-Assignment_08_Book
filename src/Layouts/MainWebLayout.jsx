@@ -1,12 +1,19 @@
 import React from 'react';
 import NavBar from '../Components/NavBar';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useNavigation } from 'react-router-dom';
+import { RingLoader } from 'react-spinners';
 
 const MainWebLayout = () => {
+    const navigation = useNavigation();
+
     return (
         <div className='max-w-screen-xl mx-auto'>
             <NavBar></NavBar>
-            <Outlet></Outlet>
+            {
+                navigation.status === 'loading' ? 
+                   <RingLoader color="#36d7b7" size={120} />
+              : <Outlet></Outlet>
+            }
         </div>
     );
 };

@@ -4,7 +4,6 @@ import Book from './Book';
 
 const Home = () => {
     const data = useLoaderData();
-    console.log(data);
     return (
         <div>
             <section className="bg-gray-100 text-gray-800">
