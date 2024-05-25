@@ -13,7 +13,8 @@ export const my_web = createBrowserRouter([
         children:[
             {
                 path:"/",
-                element:<Home></Home>
+                element:<Home></Home>,
+                loader: ()=> fetch('book.json')
             },
             {
                 path:"/listedBooks",

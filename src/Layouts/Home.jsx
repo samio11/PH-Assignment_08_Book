@@ -1,7 +1,10 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+
+import { Link, useLoaderData } from 'react-router-dom';
+import Book from './Book';
 
 const Home = () => {
+    const data = useLoaderData();
+    console.log(data);
     return (
         <div>
             <section className="bg-gray-100 text-gray-800">
@@ -19,6 +22,14 @@ const Home = () => {
                     </div>
                 </div>
             </section>
+            <div className='my-5'>
+                <h2 className='text-3xl font-semibold text-center'>Books</h2>
+            </div> 
+            <div className='my-5 grid grid-cols-1 lg:grid-cols-3 gap-5'>
+               {
+                 data?.map((x,idx)=> <Book key={idx} x={x}></Book>)
+               }
+            </div>
         </div>
     );
 };
