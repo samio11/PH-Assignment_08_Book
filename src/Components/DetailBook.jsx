@@ -1,13 +1,28 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useLoaderData, useParams } from 'react-router-dom';
+import { addBook, addWish, getBookInfo } from './localStorageLogic';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const DetailBook = () => {
     const para = useParams();
-    console.log(para);
     const allBookData = useLoaderData();
-    console.log(allBookData);
     const netData = allBookData.find((x) => x.bookId === parseInt(para.id));
     console.log(netData);
+   const handleReadBookAdd = () => {
+       addBook(netData)
+   }
+   const handleWish = () => {
+    const s1 = getBookInfo();
+    console.log(s1);
+    const isCommon = s1.find((x)=> x.bookId === netData.bookId)
+    if (isCommon) {
+        toast.error('Already Added In Wish List');
+    }
+    else{
+        addWish(netData)
+    }
+   }
     return (
         <div>
             <div className='w-full h-auto lg:h-[80vh] mt-5 flex flex-col lg:flex-row justify-start items-start'>
@@ -32,14 +47,15 @@ const DetailBook = () => {
                     <p className='text-xs text-gray-600'>Year Of Publication:<span className='text-black font-bold ml-8'>{netData.yearOfPublishing}</span></p>
                     <p className='text-xs text-gray-600'>Rating:<span className='text-black font-bold ml-8'>{netData.rating}</span></p>
                     <div className='flex justify-start items-center gap-4'>
-                         <button className='btn btn-outline btn-info'>Read</button>
-                         <button className='btn btn-outline btn-info'>Wish List</button>
+                         <button onClick={()=>handleReadBookAdd()} className='btn btn-outline btn-info'>Read</button>
+                         <button onClick={()=>handleWish()} className='btn btn-outline btn-info'>Wish List</button>
                     </div>
                 </div>
             </div>
             <div className='w-full my-6 flex justify-center items-center'>
                  <a className='btn btn-error btn-outline btn-wide' href="/">Back Home</a>
             </div>
+            <ToastContainer />
         </div>
     );
 };
