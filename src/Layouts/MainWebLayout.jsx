@@ -10,8 +10,8 @@ const MainWebLayout = () => {
         <div className='max-w-screen-xl mx-auto'>
             <NavBar></NavBar>
             {
-                navigation.status === 'loading' ? 
-                   <RingLoader color="#36d7b7" size={120} />
+                navigation.state === 'loading' ? 
+                   <RingLoader className='text-center mt-10' color="#36d7b7" size={120} />
               : <Outlet></Outlet>
             }
         </div>
